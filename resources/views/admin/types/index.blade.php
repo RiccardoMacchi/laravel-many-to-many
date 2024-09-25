@@ -8,9 +8,14 @@
                 <small>{{ $error }}</small>
             @endforeach
         @endif --}}
-        @if (session('message'))
+        @if (session('success'))
             <div class="alert alert-success">
-                {{ session('message') }}
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
             </div>
         @endif
 

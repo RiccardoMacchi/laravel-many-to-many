@@ -31,7 +31,14 @@ class TechnologyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $new_tech = new Technology();
+        $new_tech->name = $data['name'];
+        $new_tech->slug = Helper::generateSlug($data['name'], Technology::class);
+        $new_tech->save();
+
+        return redirect()->route('admin.techs.index')->with('success','Tecnologia creata con successo!');
+
     }
 
     /**
@@ -45,7 +52,7 @@ class TechnologyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Technology $tech)
     {
         //
     }
@@ -55,18 +62,26 @@ class TechnologyController extends Controller
      */
     public function update(Request $request, Technology $tech)
     {
+        $exists = Technology::where('name', $request->name)->first();
+        if($exists == null){
 
-        $data = $request->all();
-        $data['slug'] = Helper::generateSlug($data['name'], Technology::class);
+            $data = $request->all();
+            $data['slug'] = Helper::generateSlug($data['name'], Technology::class);
 
-        return redirect()->route('admin.techs.index')->with('message','Tecnologia modificata con successo!');
+            return redirect()->route('admin.techs.index')->with('success','Tecnologia modificata con successo!');
+
+        }else{
+            return redirect()->route('admin.techs.index')->with('error','Tecnologia già presente!');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Technology $tech)
     {
-        //
+        $tech->delete();
+        return redirect()->route('admin.techs.index')->with('success','Tecnologia eliminata con successo!');
+
     }
 }

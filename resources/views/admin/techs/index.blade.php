@@ -8,12 +8,16 @@
                 <small>{{ $error }}</small>
             @endforeach
         @endif --}}
-        @if (session('message'))
+        @if (session('success'))
             <div class="alert alert-success">
-                {{ session('message') }}
+                {{ session('success') }}
             </div>
         @endif
-
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <ul class="list-group list-group-flush my_list">
             @foreach ($techs as $tech)
                 <li class="d-flex justify-content-between list-group-item">

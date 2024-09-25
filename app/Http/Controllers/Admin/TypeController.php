@@ -41,9 +41,9 @@ class TypeController extends Controller
             $new_type->fill($data);
             $new_type->slug = Helper::generateSlug($new_type->name, Type::class);
             $new_type->save();
-            return redirect()->route('admin.types.index')->with('message', 'Tipo creato con successo!');
+            return redirect()->route('admin.types.index')->with('success', 'Tipo creato con successo!');
         } else{
-            return redirect()->route('admin.types.index')->with('message', 'Categoria già presente!');
+            return redirect()->route('admin.types.index')->with('error', 'Categoria già presente!');
         }
 
     }
@@ -77,9 +77,9 @@ class TypeController extends Controller
             $data['slug'] = Helper::generateSlug($data['name'], Type::class);
             $type->update($data);
 
-            return redirect()->route('admin.types.index')->with('message', 'Tipo modificato con successo!');
+            return redirect()->route('admin.types.index')->with('success', 'Tipo modificato con successo!');
         } else{
-            return redirect()->route('admin.types.index')->with('message', 'Categoria già presente!');
+            return redirect()->route('admin.types.index')->with('error', 'Categoria già presente!');
 
         }
     }
@@ -90,7 +90,7 @@ class TypeController extends Controller
     public function destroy(Type $type)
     {
         $type->delete();
-        return redirect()->route('admin.types.index')->with('message', 'Tipo eliminato con successo!');
+        return redirect()->route('admin.types.index')->with('sucess', 'Tipo eliminato con successo!');
 
     }
 }
