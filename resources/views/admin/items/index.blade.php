@@ -23,7 +23,11 @@
                         <td>{{ $item->lenguages }}</td>
                         <td>{{ $item->git_link }}</td>
                         <td>{{ $item->description }}</td>
-                        <td><span class="badge text-bg-warning">{{ dump($item->thecnologies) }}</span></td>
+                        <td>
+                            @foreach ($item->technologies as $tech)
+                                <span class="badge text-bg-warning">{{ $tech->name }}</span>
+                            @endforeach
+                        </td>
                         {{-- Colonna azioni --}}
                         <td>
                             <a class="btn btn-primary" href="{{ route('admin.items.show', ['item' => $item->id]) }}"><i
