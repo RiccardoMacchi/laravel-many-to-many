@@ -30,6 +30,7 @@ aside {
 
 .my_wrapper {
     overflow-y: scroll;
+    height: calc(100vh - 50px);
     width: 100%;
 }
 
@@ -40,16 +41,4 @@ small {
 textarea {
     width: 100%;
     height: 200px;
-}
-
-.my_list {
-
-    form {
-        flex-grow: 1;
-    }
-
-    input {
-        border: none;
-        width: 95%;
-    }
 }

@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1>TITOLO</h1>
+    <div class="container d-flex flex-column">
+        {{-- Titolo e errori --}}
+        <h1>{{ $title }}</h1>
         {{-- @if ($errors->any())
             @foreach ($errors->all() as $error)
                 <small>{{ $error }}</small>
@@ -18,6 +19,9 @@
                 {{ session('error') }}
             </div>
         @endif
+        {{-- Lista elementi --}}
+
+
         <ul class="list-group list-group-flush my_list">
             @foreach ($techs as $tech)
                 <li class="d-flex justify-content-between list-group-item">
@@ -37,6 +41,8 @@
                 </li>
             @endforeach
         </ul>
+
+        {{-- Input nuovo --}}
         <div class="my-5">
             @error('name')
                 <small>{{ $message }}</small>

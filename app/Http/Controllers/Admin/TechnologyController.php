@@ -17,8 +17,9 @@ class TechnologyController extends Controller
      */
     public function index()
     {
+        $title = 'Gestione Tecnologie';
         $techs = Technology::all();
-        return view('admin.techs.index', compact('techs'));
+        return view('admin.techs.index', compact('techs','title'));
     }
 
     /**
