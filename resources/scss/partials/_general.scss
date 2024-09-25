@@ -1,0 +1,55 @@
+aside,
+header {
+    a {
+        text-decoration: none;
+        color: white;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+#my_navbar {
+    height: 50px;
+}
+
+li {
+    list-style: none;
+    line-height: 30px;
+}
+
+.main-wrapper {
+    height: calc(100vh - 50px);
+}
+
+aside {
+    width: 200px;
+    height: 100%;
+}
+
+.my_wrapper {
+    overflow-y: scroll;
+    width: 100%;
+}
+
+small {
+    color: red;
+}
+
+textarea {
+    width: 100%;
+    height: 200px;
+}
+
+.my_list {
+
+    form {
+        flex-grow: 1;
+    }
+
+    input {
+        border: none;
+        width: 95%;
+    }
+}
