@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Functions\Helper;
 use App\Models\Technology;
 
+use App\Http\Requests\TechnologyRequest;
+
+
 class TechnologyController extends Controller
 {
     /**
@@ -29,7 +32,7 @@ class TechnologyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TechnologyRequest $request)
     {
         $data = $request->all();
         $new_tech = new Technology();
@@ -60,7 +63,7 @@ class TechnologyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Technology $tech)
+    public function update(TechnologyRequest $request, Technology $tech)
     {
         $exists = Technology::where('name', $request->name)->first();
         if($exists == null){
