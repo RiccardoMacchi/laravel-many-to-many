@@ -11,6 +11,7 @@
                     <th scope="col">Linguaggi</th>
                     <th scope="col">Link a GitHub</th>
                     <th scope="col">Descrizione</th>
+                    <th scope="col">Tecnologia</th>
                     <th scope="col">Azioni</th>
                 </tr>
             </thead>
@@ -22,6 +23,8 @@
                         <td>{{ $item->lenguages }}</td>
                         <td>{{ $item->git_link }}</td>
                         <td>{{ $item->description }}</td>
+                        <td><span class="badge text-bg-warning">{{ dump($item->thecnologies) }}</span></td>
+                        {{-- Colonna azioni --}}
                         <td>
                             <a class="btn btn-primary" href="{{ route('admin.items.show', ['item' => $item->id]) }}"><i
                                     class="fa-solid fa-eye"></i></a>
