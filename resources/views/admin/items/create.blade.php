@@ -20,7 +20,7 @@
             </div>
 
             <div class="form-group">
-                <label for="type_id">TIPO:</label>
+                <label for="type_id">Tipo:</label>
                 <select class="form-select" name="type_id" id="types">
                     <option value="">Scegli un'opzione</option>
                     @foreach ($types as $type)
@@ -51,6 +51,18 @@
                     <small>{{ $message }}</small>
                 @enderror
             </div>
+            {{-- Checkbox per technologies --}}
+            <div>
+                <label for="technologies">Seleziona la tecnologia usata:</label>
+            </div>
+            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                @foreach ($technologies as $tech)
+                    <input type="checkbox" class="btn-check" name="technologies[]" value="{{ $tech->id }}"
+                        @if (in_array($tech->id, old('technologies', []))) checked @endif id="tech-{{ $tech->id }}" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="tech-{{ $tech->id }}">{{ $tech->name }}</label>
+                @endforeach
+            </div>
+
             <div class="form-group">
                 <label for="description">Descrizione:</label>
                 <textarea name="description" id="description"> {{ old('description') }}</textarea>
@@ -67,7 +79,9 @@
                     <small>{{ $message }}</small>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="container my-5 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </form>
     </div>
 @endsection

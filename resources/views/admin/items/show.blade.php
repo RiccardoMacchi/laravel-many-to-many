@@ -14,7 +14,11 @@
                 <h4 class="card-title">TITOLO: {{ $item->title }}</h4>
                 <h6>TIPO: <span class="badge text-bg-success">{{ $item->type ? $item->type->name : 'NESSUN TIPO' }}</span>
                 </h6>
-                <p class="card-text">{{ $item->description }}</p>
+                <h5>Teconologie:</h5>
+                @foreach ($item->technologies as $tech)
+                    <span class="badge text-bg-warning">{{ $tech->name }}</span>
+                @endforeach
+                <p class="card-text my-5">{{ $item->description }}</p>
                 <a href="{{ $item->git_link }}" target="_blank" class="btn btn-primary">Vai a GitHub</a>
             </div>
             <div class="card-footer text-muted">

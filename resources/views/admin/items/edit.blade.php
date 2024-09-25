@@ -53,6 +53,21 @@
                     <small>{{ $message }}</small>
                 @enderror
             </div>
+
+            {{-- Checkbox per technologies --}}
+            <div>
+                <label for="technologies">Seleziona la tecnologia usata:</label>
+            </div>
+            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                @foreach ($technologies as $tech)
+                    <input type="checkbox" class="btn-check" name="technologies[]" value="{{ $tech->id }}"
+                        @if (
+                            ($errors->any() && in_array($tech->id, old('technologies', []))) ||
+                                (!$errors->any() && $item->technologies->contains($tech))) checked @endif id="tech-{{ $tech->id }}" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="tech-{{ $tech->id }}">{{ $tech->name }}</label>
+                @endforeach
+            </div>
+
             <div class="form-group">
                 <label for="description">Descrizione:</label>
                 <textarea name="description" id="description"> {{ old('description', $item->description) }}</textarea>
@@ -68,7 +83,9 @@
                     <small>{{ $message }}</small>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="container my-5 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </form>
     </div>
 @endsection

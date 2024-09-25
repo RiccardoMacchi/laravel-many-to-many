@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Type;
+use App\Models\Technology;
 use App\Functions\Helper;
 use App\Http\Requests\ItemRequest;
 
@@ -27,8 +28,9 @@ class ItemController extends Controller
     public function create()
     {
         $title = 'Aggiungi un nuovo lavoro';
+        $technologies = Technology::all();
         $types = Type::all();
-        return view('admin.items.create', compact('title','types'));
+        return view('admin.items.create', compact('title','types','technologies'));
     }
 
     /**
@@ -37,12 +39,18 @@ class ItemController extends Controller
     public function store(ItemRequest $request)
     {
         $data = $request->all();
+        // dd($data);
         $data['slug'] = Helper::generateSlug($data['title'], Item::class);
         $new_item = new Item();
 
         $new_item->fill($data);
 
         $new_item->save();
+        if(array_key_exists('technologies', $data)){
+            // aggiunta dei vari tag alla nuova istanza
+            $new_item->technologies()->attach($data['technologies']);
+        }
+
         return redirect()->route('admin.items.show', $new_item->id);
     }
 
@@ -61,9 +69,10 @@ class ItemController extends Controller
     public function edit(string $id)
     {
         $item = Item::find($id);
+        $technologies = Technology::all();
         $types = Type::all();
         $title = 'Stai modificando ' . $item->title;
-        return view('admin.items.edit', compact('item','title','types'));
+        return view('admin.items.edit', compact('item','title','types','technologies'));
     }
 
     /**
