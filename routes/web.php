@@ -2,10 +2,15 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+// Admin controllers
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ItemController;
 use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\TechnologyController;
+
+// Guest controller
 use App\Http\Controllers\Guest\PageController;
+
 
 
 
@@ -36,6 +41,8 @@ Route::middleware(['auth','verified'])
         Route::get('/', [DashboardController::class, 'index'])->name('home');
         Route::resource('items', ItemController::class);
         Route::resource('types', TypeController::class);
+        Route::resource('techs', TechnologyController::class);
+
     });
 
 require __DIR__.'/auth.php';
