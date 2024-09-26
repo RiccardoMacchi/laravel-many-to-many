@@ -9,6 +9,11 @@ class Technology extends Model
 {
     use HasFactory;
 
+    protected $fillable =[
+        'name',
+        'slug'
+    ];
+
     public function items(){
         return $this->belongsToMany(Item::class);
     }

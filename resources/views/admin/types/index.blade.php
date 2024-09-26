@@ -25,7 +25,10 @@
                     <form id="update-{{ $type->id }}" action="{{ route('admin.types.update', $type) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <input class="input-edit" type="text" name="name" value="{{ $type->name }}">
+                        <input class="input-edit form-control @if ($errors->any() && old('id') == $type->id) is-invalid @endif"
+                            name="name" value="{{ $type->name }}">
+                        {{-- input per la verifica di quale genera errore --}}
+                        <input type="hidden" name="id" value="{{ $type->id }}">
                     </form>
                     <div>
                         <button type="submit" class="btn btn-warning" onclick="submitUpdate({{ $type->id }})"><i
@@ -45,7 +48,9 @@
             <form action="{{ route('admin.types.store') }}" method="POST">
                 @csrf
                 <label for="name">INSERISCI UN NUOVO TIPO:</label>
-                <input type="text" name="name" placeholder="Inserisci un nuovo tipo">
+                <input type="text" name="name" placeholder="Inserisci un nuovo tipo"
+                    value="@if ($errors->any() && old('id') == $type->id) {{ old('name') }} @endif">
+                <input type="hidden" name="id" value="{{ $type->id }}">
                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
             </form>
         </div>

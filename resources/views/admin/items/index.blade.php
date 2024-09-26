@@ -8,7 +8,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">Linguaggi</th>
+                    <th scope="col">Type</th>
                     <th scope="col">Link a GitHub</th>
                     <th scope="col">Descrizione</th>
                     <th scope="col">Tecnologia</th>
@@ -20,13 +20,19 @@
                     <tr>
                         <th>{{ $item->id }}</th>
                         <td>{{ $item->title }}</td>
-                        <td>{{ $item->lenguages }}</td>
+                        <td>
+                            <span class="badge text-bg-success">{{ $item->type ? $item->type->name : 'NESSUN TIPO' }}</span>
+                        </td>
                         <td>{{ $item->git_link }}</td>
                         <td>{{ $item->description }}</td>
                         <td>
-                            @foreach ($item->technologies as $tech)
-                                <span class="badge text-bg-warning">{{ $tech->name }}</span>
-                            @endforeach
+                            @if (!$item->technologies->isEmpty())
+                                @foreach ($item->technologies as $tech)
+                                    <span class="badge text-bg-warning">{{ $tech->name }}</span>
+                                @endforeach
+                            @else
+                                <span class="badge text-bg-danger">NESSUNA TECNOLOGIA</span>
+                            @endif
                         </td>
                         {{-- Colonna azioni --}}
                         <td>
@@ -45,5 +51,8 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="container d-flex justify-content-center">
+            {{ $items->links() }}
+        </div>
     </div>
 @endsection

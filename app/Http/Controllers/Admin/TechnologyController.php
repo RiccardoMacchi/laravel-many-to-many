@@ -71,6 +71,7 @@ class TechnologyController extends Controller
 
             $data = $request->all();
             $data['slug'] = Helper::generateSlug($data['name'], Technology::class);
+            $tech->update($data);
 
             return redirect()->route('admin.techs.index')->with('success','Tecnologia modificata con successo!');
 

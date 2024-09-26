@@ -18,7 +18,7 @@ class ItemController extends Controller
     public function index()
     {
         $title = 'I miei Lavori'
-;       $items = Item::orderBy('title')->get();
+;       $items = Item::orderBy('title')->paginate(10);
         return view('admin.items.index', compact('items','title'));
     }
 
@@ -86,6 +86,11 @@ class ItemController extends Controller
             $data['slug'] = Helper::generateSlug($data['title'], Item::class);
         }
         $item->update($data);
+        if(array_key_exists('technologies', $data)){
+            $item->technologies()->sync($data['technologies']);
+        } else{
+            $item->technologies()->detach();
+        }
 
         return redirect()->route('admin.items.show', $item);
 

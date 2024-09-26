@@ -1,7 +1,7 @@
 <aside class="text-bg-dark">
     <ul>
-        <li><a href="{{ route('admin.home') }}"><i class="fa-solid fa-house"></i><span
-                    class="d-none d-md-inline">Home</span></a>
+        <li><a href="{{ route('admin.home') }}"><i class="fa-solid fa-house"></i><span class="d-none d-md-inline">
+                    Home</span></a>
         </li>
         <li><a href="{{ route('admin.items.index') }}"><i class="fa-solid fa-list"></i><span class="d-none d-md-inline">
                     Elenco Lavori</span></a></li>
