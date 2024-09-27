@@ -8,7 +8,7 @@
                 <small>{{ $error }}</small>
             @endforeach
         @endif --}}
-        <form action="{{ route('admin.items.store') }}" method="POST">
+        <form action="{{ route('admin.items.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="title">Titolo:</label>
@@ -79,9 +79,36 @@
                     <small>{{ $message }}</small>
                 @enderror
             </div>
+            <div class="form-group">
+                <label for="img_path">Carica un'immagine:</label>
+                <div class="d-flex">
+                    <div class="wrap-img w-25 text-center">
+                        <img class="img-fluid" src="/placeholder_img.jpg" id="thumb">
+                    </div>
+                    <div class="align-self-center ms-2 flex-grow-1">
+                        <input type="file" class="form-control" id="img_path" name="img_path"
+                            placeholder="Inserisci un'immagine" value="{{ old('img_path') }}" onchange="showImg(event)">
+                        @error('img_path')
+                            <small>{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+
+            </div>
             <div class="container my-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Aggiungi</button>
             </div>
         </form>
     </div>
+
+    <script>
+        function showImg(event) {
+            console.log(event.target.files[0])
+            //recupero del tag img
+            const thumb = document.getElementById('thumb');
+
+            //Associazione del tag con URL
+            thumb.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
 @endsection

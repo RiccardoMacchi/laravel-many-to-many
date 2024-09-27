@@ -3,11 +3,20 @@
 @section('content')
     <div class="container">
         <h1>{{ $title }}</h1>
+        <div class="form-group">
+            <form action="{{ route('admin.items.index') }}" method="GET">
+
+                <label for="search">Cerca tra i lavori:</label>
+                <input type="text" class="form-control" id="search" name="search" placeholder="Effettua la ricerca"
+                    value="{{ request('search') }}">
+            </form>
+        </div>
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nome</th>
+                    <th scope="col">Preview</th>
                     <th scope="col">Type</th>
                     <th scope="col">Link a GitHub</th>
                     <th scope="col">Descrizione</th>
@@ -20,6 +29,8 @@
                     <tr>
                         <th>{{ $item->id }}</th>
                         <td>{{ $item->title }}</td>
+                        <td><img class="img-fluid" src="{{ asset('storage/' . $item->img_path) }}" alt=""
+                                onerror="this.src='/placeholder_img.jpg'"></td>
                         <td>
                             <span class="badge text-bg-success">{{ $item->type ? $item->type->name : 'NESSUN TIPO' }}</span>
                         </td>

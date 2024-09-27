@@ -20,7 +20,9 @@ class Item extends Model
         'date',
         'description',
         'slug',
-        'type_id'
+        'type_id',
+        'img_path',
+        'original_img_name'
     ];
 
     public function type(){

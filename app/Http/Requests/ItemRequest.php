@@ -27,7 +27,8 @@ class ItemRequest extends FormRequest
             'lenguages' => ['required', 'string', 'min:2', 'max:255'],
             'date' => ['required', 'date'],
             'description' => ['required', 'string','min:10'],
-            'type_id' => ['required']
+            'type_id' => ['required'],
+            'img_path' => ['image','mimes:png,jpg','max:5120']
         ];
     }
 
@@ -57,6 +58,10 @@ class ItemRequest extends FormRequest
             'description.min' => 'La descrizione deve avere almeno 10 carattere.',
 
             'type_id.required' => 'Il tipo è obbligatorio',
+
+            'img_path.image' => 'Il file deve essere un\'immagine.',
+            'img_path.mimes' => 'Il file deve essere un\'immagine di tipo :values',
+            'img_path.max' => 'L\'immagine non può essere più grande di 5 MB.',
         ];
     }
 }

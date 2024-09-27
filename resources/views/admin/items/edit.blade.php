@@ -9,7 +9,7 @@
                 <small>{{ $error }}</small>
             @endforeach
         @endif --}}
-        <form action="{{ route('admin.items.update', $item) }}" method="POST">
+        <form action="{{ route('admin.items.update', $item) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -83,9 +83,52 @@
                     <small>{{ $message }}</small>
                 @enderror
             </div>
+            <div class="form-group">
+                <label for="img_path">Carica un'immagine:</label>
+                <div class="d-flex">
+                    <div class="wrap-img w-25 text-center">
+                        <img class="img-fluid" id="thumb" src="{{ asset('storage/' . $item->img_path) }}"
+                            onerror="this.src='/placeholder_img.jpg'" alt="{{ $item->original_img_name }}">
+                        {{-- Btn delete attaccato a form esterno --}}
+                        <button class="btn btn-danger" type="button" onclick="submitDeleteForm()">CANCELLA IMMAGINE <i
+                                class="fa-solid fa-eraser"></i></button>
+                    </div>
+                    <div class="align-self-center ms-2 flex-grow-1">
+                        <input type="file" class="form-control" id="img_path" name="img_path"
+                            placeholder="Inserisci un'immagine" value="{{ old('img_path', $item->original_img_name) }}"
+                            onchange="showImg(event)">
+                    </div>
+                </div>
+                @error('img_path')
+                    <small>{{ $message }}</small>
+                @enderror
+            </div>
             <div class="container my-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Modifica</button>
             </div>
         </form>
+        <form id="delete_img" class="d-inline" action="{{ route('admin.deleteImg', $item) }}" method="POST"
+            onsubmit="return confirm('Vuoi eliminare {{ $item->original_img_name }}')">
+            @csrf
+            @method('DELETE')
+        </form>
+
     </div>
+
+    <script>
+        function submitDeleteForm() {
+            let form = document.getElementById(`delete_img`);
+            // Effettuiamo il submit sul bottone
+            form.submit();
+        }
+
+        function showImg(event) {
+            console.log(event.target.files[0])
+            //recupero del tag img
+            const thumb = document.getElementById('thumb');
+
+            //Associazione del tag con URL
+            thumb.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
 @endsection
