@@ -39,6 +39,7 @@ Route::middleware(['auth','verified'])
     ->name('admin.')
     ->group(function(){
         Route::get('/', [DashboardController::class, 'index'])->name('home');
+        Route::get('types/items-types',[TypeController::class, 'itemsTypes'])->name('itemsTypes');
         Route::delete('items/delete-img/{item}',[ItemController::class, 'deleteImg'])->name('deleteImg');
         Route::resource('items', ItemController::class);
         Route::resource('types', TypeController::class);

@@ -14,8 +14,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nome</th>
+                    <th scope="col">
+                        <a href="{{ route('admin.items.index', ['direction' => $direction, 'column' => 'id']) }}">ID</a>
+                    </th>
+                    <th scope="col">
+                        <a
+                            href="{{ route('admin.items.index', ['direction' => $direction, 'column' => 'title']) }}">Nome</a>
+                    </th>
                     <th scope="col">Preview</th>
                     <th scope="col">Type</th>
                     <th scope="col">Link a GitHub</th>
@@ -29,10 +34,18 @@
                     <tr>
                         <th>{{ $item->id }}</th>
                         <td>{{ $item->title }}</td>
-                        <td><img class="img-fluid" src="{{ asset('storage/' . $item->img_path) }}" alt=""
+                        <td><img class="img-fluid thumb" src="{{ asset('storage/' . $item->img_path) }}" alt=""
                                 onerror="this.src='/placeholder_img.jpg'"></td>
                         <td>
-                            <span class="badge text-bg-success">{{ $item->type ? $item->type->name : 'NESSUN TIPO' }}</span>
+                            <a class="badge
+                            @if ($item->type?->name == 'PHP' || $item->type?->name == 'CSS') text-bg-primary
+                            @elseif ($item->type?->name == 'HTML') text-bg-danger
+                            @elseif ($item->type?->name == 'SASS') text-bg-secondary
+                            @elseif ($item->type?->name == 'JavaScript') text-bg-warning
+                            @elseif ($item->type?->name == 'SQL') text-bg-dark
+                            @else text-bg-danger @endif"
+                                href="{{ route('admin.itemsTypes') }}">{{ $item->type ? $item->type->name : 'NESSUN TIPO' }}
+                            </a>
                         </td>
                         <td>{{ $item->git_link }}</td>
                         <td>{{ $item->description }}</td>

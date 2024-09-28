@@ -7,6 +7,9 @@
                     Elenco Lavori</span></a></li>
         <li><a href="{{ route('admin.items.create') }}"><i class="fa-solid fa-newspaper"></i><span
                     class="d-none d-md-inline"> Aggiungi Lavoro</span></a></li>
+        <li><a href="{{ route('admin.itemsTypes') }}"><i class="fa-regular fa-folder-open"></i><span
+                    class="d-none d-md-inline"> Lavori per Tipo</span></a>
+        </li>
         <li><a href="{{ route('admin.types.index') }}"><i class="fa-solid fa-layer-group"></i><span
                     class="d-none d-md-inline"> Gestisci Tipi</span></a></li>
         <li><a href="{{ route('admin.techs.index') }}"><i class="fa-solid fa-microchip"></i><span

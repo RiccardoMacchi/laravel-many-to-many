@@ -93,4 +93,10 @@ class TypeController extends Controller
         return redirect()->route('admin.types.index')->with('sucess', 'Tipo eliminato con successo!');
 
     }
+
+    public function itemsTypes(){
+        $types = Type::all();
+
+        return view('admin.types.itemsTypes', compact('types'));
+    }
 }

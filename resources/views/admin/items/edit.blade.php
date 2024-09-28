@@ -83,6 +83,7 @@
                     <small>{{ $message }}</small>
                 @enderror
             </div>
+            {{-- Form immagine --}}
             <div class="form-group">
                 <label for="img_path">Carica un'immagine:</label>
                 <div class="d-flex">
@@ -90,8 +91,8 @@
                         <img class="img-fluid" id="thumb" src="{{ asset('storage/' . $item->img_path) }}"
                             onerror="this.src='/placeholder_img.jpg'" alt="{{ $item->original_img_name }}">
                         {{-- Btn delete attaccato a form esterno --}}
-                        <button class="btn btn-danger" type="button" onclick="submitDeleteForm()">CANCELLA IMMAGINE <i
-                                class="fa-solid fa-eraser"></i></button>
+                        <button class="btn btn-danger my-1" @if ($item->img_path == null) disabled @endif type="button"
+                            onclick="submitDeleteForm()">CANCELLA IMMAGINE <i class="fa-solid fa-eraser"></i></button>
                     </div>
                     <div class="align-self-center ms-2 flex-grow-1">
                         <input type="file" class="form-control" id="img_path" name="img_path"
